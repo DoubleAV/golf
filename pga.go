@@ -23,21 +23,29 @@ func (pga *PGA) TID() string {
 	return pga.tid
 }
 
+//Function to update tournament ID
 func (pga *PGA) UpdateTID() error {
 	var current struct {
 		TID string `json:"tid"`
 	}
+
+	//send request to get current tournament info
 	resp, err := client.Get("https://statdata.pgatour.com/r/current/message.json")
+	//If there is an error, return it
 	if err != nil {
 		return err
 	}
+	//close response body when finished
 	defer resp.Body.Close()
+	//decode error if there is one, and return it
 	if err := json.NewDecoder(resp.Body).Decode(&current); err != nil {
 		return err
 	}
+	//Throw error if no tournament ID is returned
 	if current.TID == "" {
 		return errors.New("TID is empty")
 	}
+	//Set tournament ID
 	pga.tid = current.TID
 	return nil
 }
