@@ -94,14 +94,17 @@ func (pga *PGA) Parse(r io.Reader) (*Leaderboard, error) {
 	}, nil
 }
 
+//Sets PGA Leaderboard
 func (pga *PGA) SetLeaderboard(lb *Leaderboard) {
 	pga.leaderboard = lb
 }
 
+//returns PGA Leaderboard
 func (pga *PGA) Leaderboard() *Leaderboard {
 	return pga.leaderboard
 }
 
+//Returns time the PGA was last updated
 func (pga *PGA) LastUpdated() time.Time {
 	return pga.lastUpdated
 }
