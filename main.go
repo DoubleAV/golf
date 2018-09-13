@@ -42,6 +42,7 @@ type Leaderboard struct {
 	Players    []*Player
 }
 
+//both pga.go and euro.go contain definitions of these functions
 type Tour interface {
 	Request() (*http.Request, error)
 	Parse(io.Reader) (*Leaderboard, error)
@@ -53,6 +54,7 @@ type Tour interface {
 	UpdateTID() error
 }
 
+//Declares array of empty interfaces.
 var tours = []Tour{
 	&PGA{},
 	&Euro{},

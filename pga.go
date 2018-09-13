@@ -15,10 +15,12 @@ type PGA struct {
 	tid         string
 }
 
+//Don't really understand why he has this here, just returns a given string.
 func (pga *PGA) String() string {
 	return "PGA Tour"
 }
 
+//Returns the TID of the PGA Tour
 func (pga *PGA) TID() string {
 	return pga.tid
 }
@@ -50,8 +52,12 @@ func (pga *PGA) UpdateTID() error {
 	return nil
 }
 
+//Request() makes a request to the PGATour leaderboard with a certain tournament ID and returns
+//The Request
 func (pga *PGA) Request() (*http.Request, error) {
-
+	//Sprintf formats string without printing it.
+	//In this case, pga.TID is inserted where %s is.
+	//
 	u := fmt.Sprintf("https://statdata.pgatour.com/r/%s/leaderboard-v2mini.json", pga.TID())
 	return http.NewRequest("GET", u, nil)
 }
@@ -109,6 +115,7 @@ func (pga *PGA) LastUpdated() time.Time {
 	return pga.lastUpdated
 }
 
+//returns the current time
 func (pga *PGA) SetLastUpdated(t time.Time) {
 	pga.lastUpdated = t
 }
